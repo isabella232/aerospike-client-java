@@ -74,15 +74,14 @@ public class AerospikeException extends RuntimeException {
 				sb.append(ResultCode.getResultString(resultCode));
 			}
 		}
-		else {
-			if (message != null) {
-				sb.append(message);
-			}
-			else {
-				sb.append(this.getClass().getName());
-			}
-		}		
-		return sb.toString();
+    sb.append(" - ");
+    if (message != null) {
+      sb.append(message);
+    }
+    else {
+      sb.append(this.getClass().getName());
+    }
+    return sb.toString();
 	}
 	
 	/**

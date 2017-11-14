@@ -224,10 +224,18 @@ public class AerospikeClient implements IAerospikeClient, Closeable {
 		this.queryPolicyDefault = policy.queryPolicyDefault;
 		this.batchPolicyDefault = policy.batchPolicyDefault;
 		this.infoPolicyDefault = policy.infoPolicyDefault;
-		
-		cluster = new Cluster(policy, hosts);
-		cluster.initTendThread(policy.failIfNotConnected);
-	}
+
+    cluster = new Cluster(policy, hosts);
+
+    // We want to bind to a single node
+		// cluster.initTendThread(policy.failIfNotConnected);
+    try {
+      cluster.forceSingleNode();
+    } catch (Exception e) {
+      close();
+      throw e;
+    }
+  }
 
 	//-------------------------------------------------------
 	// Protected Initialization

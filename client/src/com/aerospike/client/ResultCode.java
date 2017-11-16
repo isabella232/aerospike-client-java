@@ -21,6 +21,11 @@ package com.aerospike.client;
  * side file proto.h.
  */
 public final class ResultCode {
+  /**
+   * Server isn't accepting requests
+   */
+  public static final int SERVER_NOT_AVAILABLE = -8;
+
 	/**
 	 * Max connections would be exceeded.  There are no more available connections.
 	 */
@@ -116,7 +121,7 @@ public final class ResultCode {
 	/**
 	 * Server is not accepting requests.
 	 */
-	public static final int SERVER_NOT_AVAILABLE = 11;
+	public static final int PARTITION_NOT_AVAILABLE = 11;
 
 	/**
 	 * Operation is not supported with configured bin type (single-bin or
@@ -436,8 +441,8 @@ public final class ResultCode {
 		case ALWAYS_FORBIDDEN:
 			return "Operation not allowed";
 		
-		case SERVER_NOT_AVAILABLE:
-			return "Server not available";
+		case PARTITION_NOT_AVAILABLE:
+			return "Partition not available";
 		
 		case BIN_TYPE_ERROR:
 			return "Bin type error";
